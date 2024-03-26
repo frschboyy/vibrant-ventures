@@ -7,6 +7,7 @@ document.getElementById('signup-form').addEventListener('submit', async e => {
     const uName = document.getElementById('uName').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
+    const confirm = document.getElementById('Cpassword').value;
 
     // Name Validation
     if (!validateName(fName)) {
@@ -24,12 +25,17 @@ document.getElementById('signup-form').addEventListener('submit', async e => {
         return;
     }
 
-    // Password Strength
-    if (!validatePassword(password)) {
-        alert("Password is week!");
+    // Password validation
+    if (password != confirm) {
+        alert("Password does not match! Try again.")
         return;
     }
 
+    // Password Strength
+    if (!validatePassword(password)) {
+        alert("Password is weak!");
+        return;
+    }
 
     const data = {
         fName: fName,

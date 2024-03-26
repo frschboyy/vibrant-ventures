@@ -91,6 +91,7 @@ body {
 
 .form-container {
   background-color: rgba(255, 255, 255, 0.9);
+  border: 4px solid #FF6600;
   /* Semi-transparent background */
   width: 90%;
   max-width: 400px;
@@ -115,6 +116,7 @@ body {
 .form-container h2 {
   color: var(--thirdcolor);
   /* Use the color scheme from your site */
+  text-align: center;
   margin-bottom: 1rem;
 }
 
@@ -124,7 +126,7 @@ body {
   font-size: 1rem;
   padding: 10px;
   margin-bottom: 1rem;
-  border: 1px solid #ddd;
+  border: 3px solid #ddd;
   /* Light border */
   border-radius: 4px;
   /* Rounded edges for input fields */
@@ -149,6 +151,11 @@ body {
 .form-container button[type="submit"]:hover {
   background-color: var(--secondclr);
   /* Darker shade on hover */
+}
+
+::placeholder {
+  text-align: center;
+  color:rgb(159, 155, 155)
 }
 
 .account-link {

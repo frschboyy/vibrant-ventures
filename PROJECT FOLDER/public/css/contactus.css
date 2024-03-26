@@ -129,12 +129,13 @@ form input,
 form textarea {
   width: 100%;
   padding: 10px;
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.889);
   color: #777777;
   /* Slightly grey text */
   font-size: 16px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
   /* Increased font size */
-  border: 1px solid black;
+  border: 4px solid black;
 }
 
 form input ::placeholder,
@@ -150,9 +151,10 @@ form textarea ::placeholder {
   }
 */
 form input[type="submit"] {
-  background-color: #FF6600;
+  background-color: #FF9933;
   color: #FFFFFF;
-  border: none;
+  width: 50%;
+  border: 4px solid black;
   padding: 10px 20px;
   font-weight: bold;
   cursor: pointer;
@@ -160,7 +162,7 @@ form input[type="submit"] {
 }
 
 form input[type="submit"]:hover {
-  background-color: #FF9933;
+  background-color: #FF6600;
 }
 
 footer {

@@ -11,6 +11,8 @@ const validator = require('validator');
 const bodyParser = require('body-parser');
 const filestore = require("session-file-store")(sessions)
 const adminkey = "/VdN3d0nRPuxrfhfwDq1oJ4iAWp3eFYpa1lKHT8Lh4fJaGj1M0D"
+const sendMail = require('@emailjs/browser')
+
 // const cookieParser
 // const { getAuth, createUserWithEmailAndPassword } = require( "firebase/auth");
 admin.initializeApp({
@@ -145,7 +147,7 @@ app.post('/signup-data', async (request, response) => {
         const { fName, lName, uName, email, password } = request.body;
 
         try {
-            createUserWithEmailAndPassword(auth, email, password)
+            await createUserWithEmailAndPassword(auth, email, password)
                 .then(async (userCredential) => {
                     const user = userCredential.user
                     const docRef = await db.collection('users').doc(user.uid);
@@ -153,24 +155,16 @@ app.post('/signup-data', async (request, response) => {
                     await docRef.set(request.body)
 
                     return response.status(201).json({
-                        message: 'User inserted succesfully'
+                        message: 'User registered succesfully'
                     })
-
                 })
-
         } catch (error) {
             return response.status(500).json({
-                message: 'Error creating user'
+                message: 'Email already Registered'
             })
         }
-
-        // Add user data to Firestore
-        // const userData = request.body;
-
-        // console.log("User signed up successfully with ID: ", docRef.id);
-        // response.status(200).json({ message: "User signed up successfully!" });
     } catch (error) {
-        console.error("Error During Signup", error);
+        //console.error("Error During Signup", error);
         if (error.code === 'auth/email-already-in-use') {
             return response.status(400).json({ message: "Email already registered" });
         } else {
