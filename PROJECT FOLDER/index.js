@@ -7,14 +7,10 @@ const admin = require('firebase-admin');
 const serviceAccount = require("./serviceAccount.json");
 const { signInWithEmailAndPassword, getAuth, createUserWithEmailAndPassword } = require('firebase/auth');
 const Initialize = require('firebase/app');
-const validator = require('validator');
 const bodyParser = require('body-parser');
 const filestore = require("session-file-store")(sessions)
 const adminkey = "/VdN3d0nRPuxrfhfwDq1oJ4iAWp3eFYpa1lKHT8Lh4fJaGj1M0D"
-const sendMail = require('@emailjs/browser')
 
-// const cookieParser
-// const { getAuth, createUserWithEmailAndPassword } = require( "firebase/auth");
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
@@ -198,7 +194,11 @@ app.post('/login-data', async (request, response) => {
         }
     } catch (error) {
         console.error("Login Error:", error);
-        response.status(500).json({ message: "Error occured suring login. Try again." })
+        if (error.code === 'auth/invalid-credential' || error.code === 'auth/wrong-password') {
+            return response.status(401).json({ message: "Invalid email or password." });
+        } else {
+            response.status(500).json({ message: "Error occurred during login. Try again." });
+        }
     }
 });
 
